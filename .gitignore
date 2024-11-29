@@ -6,3 +6,4 @@ node_modules
 *_peg_parser.ts
 tsconfig.tsbuildinfo
 apps/remix-app/build
+apps/node-cli/backup
