@@ -55,7 +55,7 @@
     "@tanstack/react-table": "^8.20.5",
     "add": "^2.0.6",
     "chord-symbol": "^4.0.0",
-    "chordsheetjs": "10.4.0",
+    "chordsheetjs": "^10.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "deepmerge": "^4.3.1",

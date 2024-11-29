@@ -36,7 +36,7 @@
   },
   "dependencies": {
     "chord-symbol": "^4.0.0",
-    "chordsheetjs": "10.4.0",
+    "chordsheetjs": "^10.5.0",
     "he": "^1.2.0",
     "tonal": "^6.3.0"
   },

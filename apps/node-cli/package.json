@@ -60,7 +60,7 @@
     "axios": "^1.7.8",
     "chalk": "^5.3.0",
     "chord-symbol": "^4.0.0",
-    "chordsheetjs": "10.4.0",
+    "chordsheetjs": "^10.5.0",
     "firebase-admin": "^13.0.1",
     "he": "^1.2.0",
     "yargs": "^17.7.2"

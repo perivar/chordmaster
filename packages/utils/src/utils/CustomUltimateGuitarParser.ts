@@ -1,4 +1,4 @@
-import ChordSheetJS, { ChordLyricsPair, Line, Song } from "chordsheetjs";
+import ChordSheetJS from "chordsheetjs";
 
 import {
   CHORUS,
@@ -39,9 +39,6 @@ const endSectionTags: Record<string, string> = {
   [TAB]: END_OF_TAB,
 };
 
-// see https://github.com/martijnversluis/ChordSheetJS/blob/master/src/parser/chord_sheet_parser.ts
-const WHITE_SPACE = /\s/;
-
 // const CHORD_LINE_REGEX =
 //   /^\s*([A-H][b#]?(?:(?:5|dim(5|7)?|aug5?|\+5?|-5?)|(?:(?:mi?n?)?(?:(?:2|4|6|7|9|11|13|6\/9)|(?:maj?|Ma?j?)?(?:6|7|9|11|13))?)(?:\\((?:[b-](5|6|9|13)|[#+](4|5|9|11))\\)|(?:[b-](5|6|9|13)|[#+](4|5|9|11)))*(?:sus(2|4|24|2sus4)?)?(?:\\((?:[b-](5|6|9|13)|[#+](4|5|9|11))\\)|(?:[b-](5|6|9|13)|[#+](4|5|9|11)))*(?:add[b#]?(?:2|4|6|7|9|11|13))?)(?:\/[A-H][b#]?)?(?=$| )(\s|$)+)+(\s|$)+/gi;
 const CHORD_LINE_REGEX = getChordLineRegex("gi");
@@ -53,47 +50,29 @@ const CHORD_LINE_REGEX = getChordLineRegex("gi");
  * support for many variations. Besides that, some chordpro feature have been ported back
  * to ChordsOverWordsParser, which adds some interesting functionality.
  */
-export class CustomUltimateGuitarParser {
+export class CustomUltimateGuitarParser extends ChordSheetJS.ChordSheetParser {
   // this is used to find sections that end with a newline
-  currentSectionType: string | null = null;
+  private currentSectionType: string | null = null;
 
   // this is used to check whether we are processing tabs
-  waitEndOfGuitarTabs: boolean = false;
-
-  song: Song = new ChordSheetJS.Song();
-  lines: string[] = [];
-  songLine: Line | null = null;
-  chordLyricsPair: ChordLyricsPair | null = null;
-  currentLine = 0;
-  lineCount = 0;
-  processingText = true;
-  preserveWhitespace = true;
+  private waitEndOfGuitarTabs = false;
 
   /**
-   * all of the following is a copy of
-   * https://github.com/martijnversluis/ChordSheetJS/blob/master/src/parser/ultimate_guitar_parser.ts
-   * except that we check for titles in the Verse and Chorus sections
-   * and support Tab sections
+   * Instantiate a chord sheet parser
+   * @param {Object} [options={}] options
+   * @param {boolean} [options.preserveWhitespace=true] whether to preserve trailing whitespace for chords
    */
+  constructor({
+    preserveWhitespace = true,
+  }: { preserveWhitespace?: boolean } = {}) {
+    super({ preserveWhitespace }, false);
+  }
 
-  parseUltimateGuitarLine(line: string) {
-    // if (this.isSectionEnd()) {
-    //   this.endSection();
-    // }
-
-    // if (this.isStartOfVerseHeader(line)) {
-    //   this.startNewLine();
-    //   const verse = line.match(VERSE_HEADER_REGEX)?.[1];
-    //   this.startSection(VERSE, verse);
-    // } else if (this.isStartOfChorusHeader(line)) {
-    //   this.startNewLine();
-    //   const chorus = line.match(CHORUS_HEADER_REGEX)?.[1];
-    //   this.startSection(CHORUS, chorus);
-    // } else
+  override parseLine(line: string) {
     if (HEADER_BRACKETS_REGEX.test(line)) {
       this.parseHeaderLine(line, HEADER_BRACKETS_REGEX);
     } else {
-      this.songLine = this.song.addLine();
+      this.songLine = this.songBuilder.addLine();
 
       if (line.trim().length === 0) {
         this.chordLyricsPair = null;
@@ -113,97 +92,7 @@ export class CustomUltimateGuitarParser {
     this.songLine.addTag(new ChordSheetJS.Tag(COMMENT, comment));
   }
 
-  isSectionEnd(): boolean {
-    return (
-      this.songLine !== null &&
-      this.songLine.isEmpty() &&
-      this.song.previousLine !== null &&
-      !this.song.previousLine.isEmpty()
-    );
-  }
-
-  endOfSong() {
-    if (
-      this.currentSectionType !== null &&
-      this.currentSectionType in endSectionTags
-    ) {
-      this.startNewLine();
-    }
-    this.endSection({ addNewLine: false });
-  }
-
-  startSection(sectionType: ParagraphType, sectionValue?: string) {
-    if (this.currentSectionType) {
-      this.endSection();
-    }
-
-    this.currentSectionType = sectionType;
-    this.song.setCurrentProperties(sectionType);
-
-    if (sectionType in startSectionTags) {
-      this.song.addTag(
-        new ChordSheetJS.Tag(startSectionTags[sectionType], sectionValue)
-      );
-    }
-  }
-
-  endSection({ addNewLine = true } = {}) {
-    if (
-      this.currentSectionType !== null &&
-      this.currentSectionType in endSectionTags
-    ) {
-      this.song.addTag(
-        new ChordSheetJS.Tag(endSectionTags[this.currentSectionType])
-      );
-
-      if (addNewLine) {
-        this.startNewLine();
-      }
-    }
-
-    this.song.setCurrentProperties(NONE);
-    this.currentSectionType = null;
-  }
-
-  startNewLine() {
-    this.songLine = this.song.addLine();
-  }
-
-  /**
-   * all of the following is a copy of
-   * https://github.com/martijnversluis/ChordSheetJS/blob/master/src/parser/chord_sheet_parser.ts
-   * except that we check for tabs in the parse method
-   */
-
-  /**
-   * Instantiate a chord sheet parser
-   * @param {Object} options options
-   * @param {boolean} options.preserveWhitespace whether to preserve trailing whitespace for chords
-   */
-  constructor({ preserveWhitespace = true } = {}) {
-    this.preserveWhitespace = preserveWhitespace === true;
-  }
-
-  /**
-   * Parses a chord sheet into a song
-   * @param {string} chordSheet The ChordPro chord sheet
-   * @param {Object} options Optional parser options
-   * @param {Song} options.song The {@link Song} to store the song data in
-   * @returns {Song} The parsed song
-   */
-  parse(chordSheet: string, { song }: { song?: Song } = {}): Song {
-    this.initialize(chordSheet, song);
-
-    while (this.hasNextLine()) {
-      const line = this.readLine();
-      this.parseUltimateGuitarLine(line);
-    }
-
-    this.endOfSong();
-    return this.song;
-  }
-
-  parseNonEmptyLine(line: string) {
+  override parseNonEmptyLine(line: string) {
     if (!this.songLine) throw new Error("Expected this.songLine to be present");
 
     this.chordLyricsPair = this.songLine.addChordLyricsPair();
@@ -216,7 +105,7 @@ export class CustomUltimateGuitarParser {
       this.startSection(TAB);
 
       // and add the guitar tab line as lyrics
-      this.songLine = this.song.addLine();
+      this.songLine = this.songBuilder.addLine();
       this.chordLyricsPair = this.songLine.addChordLyricsPair();
       this.parseLyricsRaw(line);
 
@@ -238,7 +127,7 @@ export class CustomUltimateGuitarParser {
         this.parseLyricsWithChordsRaw(line, "");
 
         // then make sure to add the second line of chords without any lyrics
-        this.songLine = this.song.addLine();
+        this.songLine = this.songBuilder.addLine();
         this.chordLyricsPair = this.songLine.addChordLyricsPair();
         this.parseLyricsWithChordsRaw(nextLine, "");
 
@@ -256,7 +145,7 @@ export class CustomUltimateGuitarParser {
         this.startSection(TAB);
 
         // and add the guitar tab line as lyrics
-        this.songLine = this.song.addLine();
+        this.songLine = this.songBuilder.addLine();
         this.chordLyricsPair = this.songLine.addChordLyricsPair();
         this.parseLyricsRaw(nextLine);
 
@@ -281,28 +170,54 @@ export class CustomUltimateGuitarParser {
     }
   }
 
-  initialize(document: string, song: Song | null = null) {
-    if (song) {
-      this.song = song;
+  private startSection(sectionType: ParagraphType, sectionValue?: string) {
+    if (this.currentSectionType) {
+      this.endSection();
     }
 
-    this.lines = this.normalizeLineEndings(document).split("\n");
-    this.currentLine = 0;
-    this.lineCount = this.lines.length;
-    this.processingText = true;
+    this.currentSectionType = sectionType;
+    this.songBuilder.setCurrentProperties(sectionType);
+
+    if (sectionType in startSectionTags) {
+      this.songBuilder.addTag(
+        new ChordSheetJS.Tag(startSectionTags[sectionType], sectionValue)
+      );
+    }
   }
 
-  readLine() {
-    const line = this.lines[this.currentLine];
-    this.currentLine += 1;
-    return line;
+  private endSection({ addNewLine = true } = {}) {
+    if (
+      this.currentSectionType !== null &&
+      this.currentSectionType in endSectionTags
+    ) {
+      this.songBuilder.addTag(
+        new ChordSheetJS.Tag(endSectionTags[this.currentSectionType])
+      );
+
+      if (addNewLine) {
+        this.startNewLine();
+      }
+    }
+
+    this.songBuilder.setCurrentProperties(NONE);
+    this.currentSectionType = null;
   }
 
-  hasNextLine() {
-    return this.currentLine < this.lineCount;
+  private startNewLine() {
+    this.songLine = this.songBuilder.addLine();
   }
 
-  parseLyricsRaw = (rawLyricsLine: string) => {
+  override endOfSong() {
+    if (
+      this.currentSectionType !== null &&
+      this.currentSectionType in endSectionTags
+    ) {
+      this.startNewLine();
+    }
+    this.endSection({ addNewLine: false });
+  }
+
+  private parseLyricsRaw = (rawLyricsLine: string) => {
     if (!this.chordLyricsPair)
       throw new Error("Expected this.chordLyricsPair to be present");
 
@@ -314,7 +229,10 @@ export class CustomUltimateGuitarParser {
     this.chordLyricsPair.lyrics = `${lyricsLine}`;
   };
 
-  parseLyricsWithChordsRaw(rawChordsLine: string, rawLyricsLine: string) {
+  private parseLyricsWithChordsRaw(
+    rawChordsLine: string,
+    rawLyricsLine: string
+  ) {
     let chordsLine = rawChordsLine;
 
     // remove tags and trim end
@@ -328,7 +246,7 @@ export class CustomUltimateGuitarParser {
     this.parseLyricsWithChords(chordsLine, lyricsLine);
   }
 
-  parseLyricsWithChords(chordsLine: string, lyricsLine: string) {
+  override parseLyricsWithChords(chordsLine: string, lyricsLine: string) {
     this.processCharacters(chordsLine, lyricsLine);
 
     if (!this.chordLyricsPair)
@@ -344,53 +262,7 @@ export class CustomUltimateGuitarParser {
     // }
 
     if (!lyricsLine.trim().length) {
-      this.songLine = this.song.addLine();
+      this.songLine = this.songBuilder.addLine();
     }
-  }
-
-  processCharacters(chordsLine: string, lyricsLine: string) {
-    for (let c = 0, charCount = chordsLine.length; c < charCount; c += 1) {
-      const chr = chordsLine[c];
-      const nextChar = chordsLine[c + 1];
-      const isWhiteSpace = WHITE_SPACE.test(chr);
-      this.addCharacter(chr, nextChar);
-
-      if (!this.chordLyricsPair)
-        throw new Error("Expected this.chordLyricsPair to be present");
-
-      this.chordLyricsPair.lyrics += lyricsLine[c] || "";
-      this.processingText = !isWhiteSpace;
-    }
-  }
-
-  addCharacter(chr: string, nextChar: string) {
-    const isWhiteSpace = WHITE_SPACE.test(chr);
-
-    if (!isWhiteSpace) {
-      this.ensureChordLyricsPairInitialized();
-    }
-
-    if (!isWhiteSpace || this.shouldAddCharacterToChords(nextChar)) {
-      if (!this.chordLyricsPair)
-        throw new Error("Expected this.chordLyricsPair to be present");
-      this.chordLyricsPair.chords += chr;
-    }
-  }
-
-  shouldAddCharacterToChords(nextChar: string) {
-    return nextChar && WHITE_SPACE.test(nextChar) && this.preserveWhitespace;
-  }
-
-  ensureChordLyricsPairInitialized() {
-    if (!this.processingText) {
-      if (!this.songLine)
-        throw new Error("Expected this.songLine to be present");
-      this.chordLyricsPair = this.songLine.addChordLyricsPair();
-      this.processingText = true;
-    }
-  }
-
-  normalizeLineEndings(string: string): string {
-    return string.replace(/\r\n?/g, "\n");
   }
 }

@@ -39,8 +39,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       chordsheetjs:
-        specifier: 10.4.0
-        version: 10.4.0
+        specifier: ^10.5.0
+        version: 10.5.0
       firebase-admin:
         specifier: ^13.0.1
         version: 13.0.1
@@ -223,8 +223,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       chordsheetjs:
-        specifier: 10.4.0
-        version: 10.4.0
+        specifier: ^10.5.0
+        version: 10.5.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -392,8 +392,8 @@ importers:
         specifier: ^4.0.0
         version: 4.0.0
       chordsheetjs:
-        specifier: 10.4.0
-        version: 10.4.0
+        specifier: ^10.5.0
+        version: 10.5.0
       he:
         specifier: ^1.2.0
         version: 1.2.0
@@ -3631,8 +3631,8 @@ packages:
   chord-symbol@4.0.0:
     resolution: {integrity: sha512-GeECWgVsAAC85G1qpvZo9eLkhfN/9cfX1gD7IXiYFary+JvMIhef3w/Wrm9O6tmjdP5nNeIb3pKDYuA1z25SLg==}
 
-  chordsheetjs@10.4.0:
-    resolution: {integrity: sha512-cT/ieHmoqEZqxBOfepSAFrrT4nD3PEoQM5LAcmw0wJ055+dDBl1IQnLvhgO4HgbT6LNyssrzWvXjzv6+2DUCpQ==}
+  chordsheetjs@10.5.0:
+    resolution: {integrity: sha512-6bhv3fDWGXPifcEwrJcePoMTA1AvGQqjBZ6VfWWR72yVWm2dCqYYudLyZNQzywif91vNVFqKA8A7ooTqDyuGCQ==}
     engines: {node: '>=16'}
 
   chownr@1.1.4:
@@ -10788,7 +10788,7 @@ snapshots:
     dependencies:
       lodash: 4.17.21
 
-  chordsheetjs@10.4.0:
+  chordsheetjs@10.5.0:
     dependencies:
       lodash.get: 4.4.2
 

@@ -1,7 +1,7 @@
 import ChordSheetJS from "chordsheetjs";
 
-import { parseUltimateGuitar } from "../../utils/scrapeUtils";
 import { CustomUltimateGuitarRawParser } from "../CustomUltimateGuitarRawParser";
+import { parseUltimateGuitar } from "../scrapeUtils";
 import {
   desperadoChordsChordPro,
   enStjerneSkinnerINattChordsChordPro,
