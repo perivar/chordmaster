@@ -1,0 +1,2 @@
+build
+src/parser/*_peg_parser.ts

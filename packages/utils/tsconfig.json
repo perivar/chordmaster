@@ -1,0 +1,58 @@
+{
+  "extends": "../../tsconfig.base.json",
+
+  "include": ["src/**/*"],
+  "exclude": [
+    "node_modules",
+    "build",
+    "**/__tests__/**" // Exclude test files
+  ],
+
+  "compilerOptions": {
+    /* Paths: */
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+
+    /* Base Options: */
+    "esModuleInterop": true, // Enable compatibility for CommonJS modules
+    "skipLibCheck": true,
+    "target": "ES2022", //  ES2018
+    // "verbatimModuleSyntax": true, // force import type
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+
+    /* React */
+    "jsx": "react-jsx",
+
+    /* Strictness */
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+
+    /* If NOT transpiling with TypeScript: */
+    "moduleResolution": "Bundler", // or "node"
+    "module": "ESNext", // or "CommonJS"
+    // "noEmit": true, // Vite takes care of building everything, not tsc.
+
+    /* If transpiling with TypeScript: */
+    "outDir": "build", // Output directory for compiled files
+    "declaration": true, // Emit `.d.ts` declaration files
+    "declarationMap": true, // Generate `.d.ts.map` files
+    "sourceMap": true, // Generate `.js.map` files
+
+    /* If your code doesn't run in the DOM: */
+    "lib": ["DOM", "DOM.Iterable", "ES2022"],
+
+    /* Types */
+    // for some reason using typeRoots does not work, jest types are not properly included
+    // "typeRoots": ["./node_modules", "./node_modules/@types", "./app/lib/types"],
+    "types": ["jest", "node", "chord-symbol.d.ts"]
+  }
+}

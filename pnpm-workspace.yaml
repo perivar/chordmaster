@@ -1,0 +1,3 @@
+packages:
+  - "packages/*"     # Shared code, utils, hooks, components
+  - "apps/*"         # Expo and Remix apps

@@ -1,0 +1,26 @@
+{
+  "name": "chordmaster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "build": "pnpm -r run build",
+    "dev": "pnpm -r run dev",
+    "lint": "pnpm -r run lint",
+    "lint-fix": "pnpm -r run lint-fix",
+    "format": "pnpm -r run format",
+    "format-fix": "pnpm -r run format-fix",
+    "test": "pnpm -r run test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.9.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "typescript": "5.6.3"
+  }
+}

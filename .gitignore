@@ -1,0 +1,8 @@
+.wrangler
+build
+firebase-config.json
+serviceAccountKey.json
+node_modules
+*_peg_parser.ts
+tsconfig.tsbuildinfo
+apps/remix-app/build
