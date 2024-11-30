@@ -1,0 +1,20 @@
+diff --git a/node_modules/react-native-svg/src/index.d.ts b/node_modules/react-native-svg/src/index.d.ts
+index 891a99d..3f10f2f 100644
+--- a/node_modules/react-native-svg/src/index.d.ts
++++ b/node_modules/react-native-svg/src/index.d.ts
+@@ -314,6 +314,7 @@ export interface LinearGradientProps {
+   gradientUnits?: Units;
+   gradientTransform?: ColumnMajorTransformMatrix | string;
+   id?: string;
++  children?: React.ReactNode;
+ }
+ export const LinearGradient: React.ComponentClass<LinearGradientProps>;
+ export type LinearGradient = React.ComponentClass<LinearGradientProps>;
+@@ -441,6 +442,7 @@ export interface TextProps extends TextSpecificProps {
+   rotate?: NumberArray;
+   opacity?: NumberProp;
+   inlineSize?: NumberProp;
++  children?: React.ReactNode;
+ }
+ export const Text: React.ComponentClass<TextProps>;
+ export type Text = React.ComponentClass<TextProps>;

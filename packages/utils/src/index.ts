@@ -1,7 +1,7 @@
 export * from "./lib/ChordSheetConstants";
 export * from "./lib/MySong";
 export * from "./utils/scrapeUtils";
-export * from "./utils/__tests__/testContent";
+// export * from "./utils/__tests__/testContent"; // cannot export anything under __tests__
 
 export * from "./utils/CustomHtmlDivFormatter";
 export * from "./utils/CustomUltimateGuitarFormatter";

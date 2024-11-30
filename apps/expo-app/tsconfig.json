@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    /* Paths: */
+    "paths": {
+      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
+    },
+
+    /* Base Options: */
+    "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
+
+    "module": "commonjs",
+
+    /* React */
+    "jsx": "react-jsx", // when using react-native from tsconfig.base I have to explicitly add React for <> to work
+
+    /* Strictness */
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true
+  },
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js",
+    "functions/",
+    "dist/"
+  ],
+  "extends": "expo/tsconfig.base"
+}

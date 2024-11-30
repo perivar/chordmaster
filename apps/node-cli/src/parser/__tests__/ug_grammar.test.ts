@@ -1,9 +1,9 @@
+import ChordSheetJS, { ChordSheetSerializer } from "chordsheetjs";
+
 import {
   chordTestChordPro4,
   chordTestPlainFormatter4,
-} from "@chordmaster/utils";
-import ChordSheetJS, { ChordSheetSerializer } from "chordsheetjs";
-
+} from "../../../../../packages/utils/src/utils/__tests__/testContent";
 import { parse as parseChordPro, ParseOptions } from "../chord_pro_peg_parser";
 
 export type ChordProParserOptions = ParseOptions & {

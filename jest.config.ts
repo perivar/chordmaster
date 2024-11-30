@@ -35,18 +35,20 @@ const config = {
       ],
       testRegex: "/__tests__/.*.(spec|test).ts$",
     },
-    // {
-    //   displayName: "expo-app",
-    //   roots: [`${expoAppDir}`],
-    //   transform: {
-    //     "\\.[jt]sx?$": ["ts-jest", { tsconfig: `${expoAppDir}/tsconfig.json`, isolatedModules: true }],
-    //   },
-    //   transformIgnorePatterns: [
-    //     `${expoAppDir}/node_modules/(?!(${untranspiledModulePatterns.join("|")})/)`,
-    //   ],
+    {
+      displayName: "expo-app",
+      roots: [`${expoAppDir}`],
+      transform: {
+        // had to add isolatedModules: true to make sure the jest tests did not take forever to start
+        // https://github.com/jestjs/jest/issues/10833
+        "\\.[jt]sx?$": ["ts-jest", { tsconfig: `${expoAppDir}/tsconfig.json`, isolatedModules: true }],
+      },
+      transformIgnorePatterns: [
+        `${expoAppDir}/node_modules/(?!(${untranspiledModulePatterns.join("|")})/)`,
+      ],
 
-    //   testRegex: "/__tests__/.*.(spec|test).ts$"
-    // },
+      testRegex: "/__tests__/.*.(spec|test).ts$"
+    },
     {
       displayName: "node-cli",
       roots: [`${nodeCliDir}`],

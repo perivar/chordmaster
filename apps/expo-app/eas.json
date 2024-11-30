@@ -1,0 +1,40 @@
+{
+  "cli": {
+    "version": ">= 0.52.0",
+    "promptToConfigurePushNotifications": false
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "development-simulator": {
+      "developmentClient": true,
+      "ios": {
+        "simulator": true
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "channel": "preview"
+    },
+    "preview-simulator": {
+      "channel": "preview-simulator",
+      "ios": {
+        "simulator": true
+      }
+    },
+    "production": {
+      "channel": "production"
+    }
+  },
+  "submit": {
+    "production": {
+      "ios": {
+        "appleId": "perivar@nerseth.com",
+        "ascAppId": "1626506479",
+        "appleTeamId": "AB12XYZ34S"
+      }
+    }
+  }
+}

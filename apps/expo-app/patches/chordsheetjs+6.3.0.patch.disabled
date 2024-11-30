@@ -1,0 +1,19 @@
+diff --git a/node_modules/chordsheetjs/lib/index.js b/node_modules/chordsheetjs/lib/index.js
+index a13f765..7ed034b 100644
+--- a/node_modules/chordsheetjs/lib/index.js
++++ b/node_modules/chordsheetjs/lib/index.js
+@@ -1,4 +1,3 @@
+-var $988mA$process = require("process");
+ var $988mA$lodashget = require("lodash.get");
+ var $988mA$handlebars = require("handlebars");
+ 
+@@ -1985,8 +1984,7 @@ function $21a34a464e7bc609$export$b680e6b2c82f8c2f(message) {
+     try {
+         throw new Error(`DEPRECATION: ${message}`);
+     } catch (e) {
+-        if (typeof $988mA$process === 'object' && typeof $988mA$process.emitWarning === 'function') $988mA$process.emitWarning(`${message}\n${e.stack}`);
+-        else console.warn(`${message}\n${e.stack}`);
++        console.warn(`${message}\n${e.stack}`);
+     }
+ }
+ function $21a34a464e7bc609$export$78d1711480f95c3e(string) {
