@@ -1,10 +1,6 @@
 import { ColorSchemeName } from "react-native";
 
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { Provider as PaperProvider } from "react-native-paper";
 
 import useFirebaseAuth from "../hooks/useFirebaseAuth";
@@ -45,15 +41,11 @@ const RootNavigator = () => {
 
 const AppNavigator = ({ colorScheme }: { colorScheme?: ColorSchemeName }) => {
   const isDarkMode = colorScheme === ThemeType.DARK;
-  const paperTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
-  const navigationTheme = {
-    ...paperTheme,
-    fonts: isDarkMode ? DarkTheme.fonts : DefaultTheme.fonts,
-  };
+  const combinedTheme = isDarkMode ? CombinedDarkTheme : CombinedDefaultTheme;
 
   return (
-    <PaperProvider theme={paperTheme}>
-      <NavigationContainer theme={navigationTheme}>
+    <PaperProvider theme={combinedTheme}>
+      <NavigationContainer theme={combinedTheme}>
         <RootNavigator />
       </NavigationContainer>
     </PaperProvider>

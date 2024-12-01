@@ -188,9 +188,12 @@ const SongTransformer: FunctionComponent<Props> = props => {
       }
       song = new ChordProParser().parse(chordProSong);
     } else {
-      song = new ChordSheetParser({
-        preserveWhitespace: true,
-      }).parse(props.chordSheetSong!);
+      song = new ChordSheetParser(
+        {
+          preserveWhitespace: true,
+        },
+        false
+      ).parse(props.chordSheetSong!);
     }
   } catch (e) {
     if (e instanceof Error) {

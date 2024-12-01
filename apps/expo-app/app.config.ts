@@ -42,7 +42,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   assetBundlePatterns: ["**/*"],
   userInterfaceStyle: "automatic",
-  newArchEnabled: true,
+  newArchEnabled: false,
   ios: {
     supportsTablet: true,
     bundleIdentifier: "com.nerseth.chordmaster",
@@ -63,6 +63,8 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     favicon: "./assets/favicon.png",
   },
   plugins: [
+    "expo-font",
+    "expo-localization",
     [
       // https://github.com/expo/eas-cli/issues/693#issuecomment-1095229385
       "expo-document-picker",

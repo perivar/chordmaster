@@ -68,9 +68,9 @@ const MainTab = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        // tabBarStyle: { backgroundColor: colors.surface },
+        tabBarStyle: { backgroundColor: colors.surface },
         tabBarActiveTintColor: colors.onSurface,
-        // tabBarInactiveTintColor: colors.onSurfaceDisabled,
+        tabBarInactiveTintColor: colors.onSurfaceDisabled,
         headerShown: false,
       }}>
       <Tab.Screen
@@ -178,6 +178,7 @@ const RootStackNavigator = () => {
           backgroundColor: colors.background,
         },
         headerTintColor: colors.onBackground,
+        cardStyle: { backgroundColor: colors.background },
       }}>
       <RootStack.Screen
         name="HomeScreen"

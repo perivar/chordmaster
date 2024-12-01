@@ -8,7 +8,6 @@ import { Provider } from "react-redux";
 
 import LocalizationProvider from "./src/context/LocalizationProvider";
 import ThemeProvider from "./src/context/ThemeProvider";
-import useCachedResources from "./src/hooks/useCachedResources";
 import AppNavigator from "./src/navigation/AppNavigator";
 import store from "./src/redux/store";
 
@@ -17,7 +16,8 @@ import store from "./src/redux/store";
 LogBox.ignoreLogs(["'SplashScreen.show'"]);
 
 export default function App() {
-  const isLoadingComplete = useCachedResources();
+  // const isLoadingComplete = useCachedResources();
+  const isLoadingComplete = true;
 
   if (!isLoadingComplete) {
     return null;

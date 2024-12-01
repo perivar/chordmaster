@@ -20,6 +20,7 @@ import {
 // using both navigation and react paper theme:
 // https://callstack.github.io/react-native-paper/theming-with-react-navigation.html
 // https://github.com/callstack/react-native-paper/blob/main/example/src/index.tsx
+// https://hemanshum.medium.com/the-ultimate-guide-to-custom-theming-with-react-native-paper-expo-and-expo-router-8eba14adcab3
 const { LightTheme, DarkTheme } = adaptNavigationTheme({
   reactNavigationLight: NavigationDefaultTheme,
   reactNavigationDark: NavigationDarkTheme,
@@ -30,78 +31,24 @@ export const CombinedDefaultTheme = {
   ...PaperDefaultTheme,
   ...LightTheme,
 
+  fonts: {
+    // react-native-paper
+    ...PaperDefaultTheme.fonts,
+    bodySmall: PaperDefaultTheme.fonts.bodySmall,
+    bodyMedium: PaperDefaultTheme.fonts.bodyMedium,
+    bodyLarge: PaperDefaultTheme.fonts.bodyLarge,
+
+    // react-navigation
+    regular: NavigationDefaultTheme.fonts.regular,
+    medium: NavigationDefaultTheme.fonts.medium,
+    bold: NavigationDefaultTheme.fonts.bold,
+    heavy: NavigationDefaultTheme.fonts.heavy,
+  },
+
   colors: {
     ...PaperDefaultTheme.colors,
     ...LightTheme.colors,
-
-    //#region Color Description
-    // React Navigation Colors:
-    // primary (string): The primary color of the app used to tint various elements. Usually you'll want to use your brand color for this.
-    // background (string): The color of various backgrounds, such as background color for the screens.
-    // card (string): The background color of card-like elements, such as headers, tab bars etc.
-    // text (string): The text color of various elements.
-    // border (string): The color of borders, e.g. header border, tab bar border etc.
-    // notification (string): The color of Tab Navigator badge.
-
-    // Defaults from adaptNavigationTheme():
-    // primary: MD3Theme.colors.primary,
-    // background: MD3Theme.colors.background,
-    // card: MD3Theme.colors.elevation.level2,
-    // text: MD3Theme.colors.onSurface,
-    // border: MD3Theme.colors.outline,
-    // notification: MD3Theme.colors.error,
-
-    // React Native Paper Material Colors:
-    // primary,
-    // primaryContainer,
-    // secondary,
-    // secondaryContainer,
-    // tertiary,
-    // tertiaryContainer,
-    // surface,
-    // surfaceVariant,
-    // surfaceDisabled,
-    // background,
-    // error,
-    // errorContainer,
-    // onPrimary,
-    // onPrimaryContainer,
-    // onSecondary,
-    // onSecondaryContainer,
-    // onTertiary,
-    // onTertiaryContainer,
-    // onSurface,
-    // onSurfaceVariant,
-    // onSurfaceDisabled,
-    // onError,
-    // onErrorContainer,
-    // onBackground,
-    // outline,
-    // shadow,
-    // inverseOnSurface,
-    // inverseSurface,
-    // inversePrimary,
-    // backdrop,
-    // #endregion
-
-    primary: COLORS.primary,
-    secondary: COLORS.secondary,
-    tertiary: COLORS.blue,
-    // error: COLORS.error,
-    background: COLORS.white2,
-    onBackground: COLORS.primary,
-
-    // bottom tabs
-    onSurface: COLORS.blue,
-    card: COLORS.white2,
-
-    // side menu and tab
-    primaryContainer: COLORS.lightGray2, // side menu and inactive tab
-    secondaryContainer: COLORS.blue, // active
-    onPrimary: COLORS.white2, // button text
-    onPrimaryContainer: COLORS.darkGray,
-    onSecondaryContainer: COLORS.white2,
-    onSurfaceDisabled: COLORS.gray,
+    ...COLORS.light,
   },
 };
 
@@ -113,28 +60,24 @@ export const CombinedDarkTheme: CombinedAppTheme = {
   ...PaperDarkTheme,
   ...DarkTheme,
 
+  fonts: {
+    // react-native-paper
+    ...PaperDarkTheme.fonts,
+    bodySmall: PaperDarkTheme.fonts.bodySmall,
+    bodyMedium: PaperDarkTheme.fonts.bodyMedium,
+    bodyLarge: PaperDarkTheme.fonts.bodyLarge,
+
+    // react-navigation
+    regular: NavigationDarkTheme.fonts.regular,
+    medium: NavigationDarkTheme.fonts.medium,
+    bold: NavigationDarkTheme.fonts.bold,
+    heavy: NavigationDarkTheme.fonts.heavy,
+  },
+
   colors: {
     ...PaperDarkTheme.colors,
     ...DarkTheme.colors,
-
-    primary: COLORS.lightGray,
-    secondary: COLORS.gray1,
-    tertiary: COLORS.lightBlue,
-    // error: COLORS.error,
-    background: COLORS.black,
-    onBackground: COLORS.white2,
-
-    // bottom tabs
-    onSurface: COLORS.lightBlue,
-    card: COLORS.primary,
-
-    // side menu and tab
-    primaryContainer: COLORS.darkGray, // side menu and inactive tab
-    secondaryContainer: COLORS.blue, // active
-    onPrimary: COLORS.darkGray2, // button text
-    onPrimaryContainer: COLORS.white2,
-    onSecondaryContainer: COLORS.white2,
-    onSurfaceDisabled: COLORS.gray,
+    ...COLORS.dark,
   },
 };
 
