@@ -28,9 +28,4 @@ console.log("Current locale", Localization.locale);
 console.log("All locales", Localization.locales);
 console.log("All translations", Object.keys(i18n.translations));
 
-// export const getString = (param: Paths<typeof en>, mapObj?: object): string => {
-//   if (mapObj) return i18n.t(param, mapObj);
-//   return i18n.t(param);
-// };
-
 export default i18n;

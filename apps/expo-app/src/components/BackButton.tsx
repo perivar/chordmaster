@@ -1,9 +1,9 @@
 import { memo } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 
-import { getStatusBarHeight } from "react-native-status-bar-height";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 type BackButtonProps = {
   goBack?: () => void;
@@ -11,9 +11,13 @@ type BackButtonProps = {
 
 const BackButton = ({ goBack }: BackButtonProps) => {
   const { dark } = useTheme();
+  const insets = useSafeAreaInsets(); // Get safe area insets
 
   return (
-    <TouchableOpacity onPress={goBack} style={styles.container}>
+    <TouchableOpacity
+      onPress={goBack}
+      style={[styles.container, { top: 10 + insets.top }]} // Dynamic top value
+    >
       <Image
         style={[styles.image, { tintColor: dark ? "white" : "black" }]}
         source={require("../assets/arrow_back.png")}
@@ -25,7 +29,6 @@ const BackButton = ({ goBack }: BackButtonProps) => {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    top: 10 + getStatusBarHeight(),
     left: 0,
     zIndex: 1, // make sure it is clickable even when other elements are overlapping
   },

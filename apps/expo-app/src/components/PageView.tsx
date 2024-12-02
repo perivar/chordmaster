@@ -3,7 +3,7 @@ import { StyleProp, ViewStyle } from "react-native";
 
 import { Edge, SafeAreaView } from "react-native-safe-area-context";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 interface IPageView {
   children?: React.ReactNode;
@@ -34,8 +34,8 @@ const PageView = ({
   //   <View
   //     style={{
   //       flex: 1,
-  //       justifyContent: 'space-between',
-  //       alignItems: 'center',
+  //       justifyContent: "space-between",
+  //       alignItems: "center",
   //     }}>
   //     <Text>This is top text.</Text>
   //     <Text>This is bottom text.</Text>

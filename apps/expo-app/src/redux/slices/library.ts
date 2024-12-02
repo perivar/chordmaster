@@ -1,10 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import useFirestore, {
-  IArtist,
-  IPlaylist,
-  ISong,
-} from "../../hooks/useFirestore";
+import useFirestore, { IArtist, IPlaylist, ISong } from "@/hooks/useFirestore";
 
 export interface ILibraryState {
   songs: ISong[];

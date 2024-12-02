@@ -87,8 +87,13 @@ interface UseThemeHook extends ThemeContextInterface {
 }
 
 const useTheme = (): UseThemeHook => {
-  const { themeMode, setThemeMode, toggleThemeMode } =
-    useContext(ThemeContext)!;
+  const context = useContext(ThemeContext);
+
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeContext.Provider");
+  }
+
+  const { themeMode, setThemeMode, toggleThemeMode } = context;
 
   return {
     dark: themeMode === ThemeType.DARK,

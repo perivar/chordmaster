@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import { StyleSheet, Text } from "react-native";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 type Props = {
   children: React.ReactNode;

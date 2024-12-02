@@ -1,6 +1,6 @@
 import { Image, StyleSheet, View } from "react-native";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 const SplashScreen = () => {
   const { theme } = useTheme();
@@ -33,6 +33,5 @@ const styles = StyleSheet.create({
   image: {
     width: 256,
     height: 256,
-    // marginBottom: 8,
   },
 });

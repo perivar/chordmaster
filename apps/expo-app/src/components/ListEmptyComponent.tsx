@@ -1,8 +1,8 @@
 import { StyleProp, Text, TextStyle, View, ViewStyle } from "react-native";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
-import { FONTS } from "../constants/theme";
+import { FONTS } from "@/constants/theme";
 
 export interface IListEmptyComponent {
   emptyMessage?: string;

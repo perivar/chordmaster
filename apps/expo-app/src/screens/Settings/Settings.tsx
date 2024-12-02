@@ -9,42 +9,32 @@ import {
 } from "react-native";
 
 import { pad } from "@chordmaster/utils";
-import { StackNavigationProp } from "@react-navigation/stack";
+import { router } from "expo-router";
 import Dialog from "react-native-dialog";
 
-import AuthErrorBox from "../../components/AuthErrorBox";
-import AuthSuccessBox from "../../components/AuthSuccessBox";
-import ListItem from "../../components/ListItem";
-import LoadingIndicator from "../../components/LoadingIndicator";
-import PageView from "../../components/PageView";
-import PickerModal from "../../components/PickerModal";
-import useBundler from "../../hooks/useBundler";
-import useFirebaseAuth from "../../hooks/useFirebaseAuth";
-import useFirestore from "../../hooks/useFirestore";
-import { useLocalization } from "../../hooks/useLocalization";
-import { useTheme } from "../../hooks/useTheme";
-import { userSelector } from "../../redux/slices/auth";
+import useBundler from "@/hooks/useBundler";
+import useFirebaseAuth from "@/hooks/useFirebaseAuth";
+import useFirestore from "@/hooks/useFirestore";
+import { useLocalization } from "@/hooks/useLocalization";
+import { useTheme } from "@/hooks/useTheme";
+import AuthErrorBox from "@/components/AuthErrorBox";
+import AuthSuccessBox from "@/components/AuthSuccessBox";
+import ListItem from "@/components/ListItem";
+import LoadingIndicator from "@/components/LoadingIndicator";
+import PageView from "@/components/PageView";
+import PickerModal from "@/components/PickerModal";
+import { exportFile } from "@/utils/exportFile";
+import { importFile } from "@/utils/importFile";
+
+import AboutDev from "./components/AboutDev";
+import { userSelector } from "@/redux/slices/auth";
 import {
   updateUserAppConfigReducer,
   userAppConfigSelector,
-} from "../../redux/slices/config";
-import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
-import { SettingsStackParamList } from "../../types/types";
-import { exportFile } from "../../utils/exportFile";
-import { importFile } from "../../utils/importFile";
-import AboutDev from "./components/AboutDev";
+} from "@/redux/slices/config";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 
-type SettingsScreenNavigationProp = StackNavigationProp<
-  SettingsStackParamList,
-  "Settings"
->;
-type Props = {
-  navigation: SettingsScreenNavigationProp;
-};
-
-const Settings: FC<Props> = props => {
-  const { navigation } = props;
-
+const Settings: FC = () => {
   const { t, setLocale, locale, languages } = useLocalization();
 
   const { theme, setThemeMode: setTheme } = useTheme();
@@ -172,7 +162,10 @@ const Settings: FC<Props> = props => {
   };
 
   const configureFontSize = () => {
-    navigation.navigate("FontSizeSelect");
+    router.navigate({
+      pathname: "/settings/fontsizeselect",
+      params: {},
+    });
   };
 
   const showDialog = () => {

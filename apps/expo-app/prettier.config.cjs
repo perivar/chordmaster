@@ -14,6 +14,11 @@ module.exports = {
     "", // use empty strings to separate groups with empty lines
     "<THIRD_PARTY_MODULES>", // Third party modules (this is a plugin keyword)
     "",
+    "^@/lib/(.*)$",
+    "^@/hooks/(.*)$",
+    "^@/components/(.*)$",
+    "^@/utils/(.*)$",
+
     "^../lib/(.*)$",
     "^../hooks/(.*)$",
     "^../components/(.*)$",

@@ -1,20 +1,20 @@
 {
   "compilerOptions": {
-    /* Paths: */
     "paths": {
-      "@firebase/auth": ["./node_modules/@firebase/auth/dist/index.rn.d.ts"]
+      "@firebase/auth": [
+        "./node_modules/@firebase/auth/dist/index.rn.d.ts"
+      ],
+      "@/*": [
+        "./src/*"
+      ],
+      "@assets/*": [
+        "./assets/*"
+      ]
     },
-
-    /* Base Options: */
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-
     "module": "commonjs",
-
-    /* React */
-    "jsx": "react-jsx", // when using react-native from tsconfig.base I have to explicitly add React for <> to work
-
-    /* Strictness */
+    "jsx": "react-jsx",
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
@@ -29,5 +29,12 @@
     "functions/",
     "dist/"
   ],
-  "extends": "expo/tsconfig.base"
+  "extends": "expo/tsconfig.base",
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts",
+    "nativewind-env.d.ts"
+  ]
 }

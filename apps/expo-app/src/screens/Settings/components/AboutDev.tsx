@@ -9,9 +9,10 @@ import {
 import * as Application from "expo-application";
 import Constants from "expo-constants";
 
-import { FONTS, SIZES } from "../../../constants/theme";
-import { useLocalization } from "../../../hooks/useLocalization";
-import { useTheme } from "../../../hooks/useTheme";
+import { useLocalization } from "@/hooks/useLocalization";
+import { useTheme } from "@/hooks/useTheme";
+
+import { FONTS, SIZES } from "@/constants/theme";
 
 const AboutDev = () => {
   const { t } = useLocalization();

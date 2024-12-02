@@ -10,8 +10,8 @@ import { NativeSyntheticEvent } from "react-native";
 import WebView from "react-native-webview";
 import { WebViewMessage } from "react-native-webview/lib/WebViewTypes";
 
-import { useTheme } from "../hooks/useTheme";
-import { useDimensions } from "../utils/useDimensions";
+import { useTheme } from "@/hooks/useTheme";
+import { useDimensions } from "@/utils/useDimensions";
 
 interface Props {
   chordProContent: string;

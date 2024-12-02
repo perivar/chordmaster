@@ -81,8 +81,10 @@ export const FirebaseProvider = ({ children }: { children: ReactNode }) => {
 // example: const { auth, db, user } = useFirebase();
 export const useFirebase = () => {
   const context = useContext(FirebaseContext);
+
   if (!context) {
     throw new Error("useFirebase must be used within a FirebaseProvider");
   }
+
   return context;
 };

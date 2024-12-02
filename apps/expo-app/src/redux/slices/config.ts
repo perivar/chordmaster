@@ -1,8 +1,9 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { APP_DEFAULTS, USER_APP_DEFAULTS } from "../../constants/defaults";
-import { IAppConfig, IUserAppConfig } from "../../hooks/useFirestore";
+import { IAppConfig, IUserAppConfig } from "@/hooks/useFirestore";
+
 import { RootState } from "../store";
+import { APP_DEFAULTS, USER_APP_DEFAULTS } from "@/constants/defaults";
 
 export interface IConfigState {
   appConfig: IAppConfig;

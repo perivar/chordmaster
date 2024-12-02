@@ -18,14 +18,14 @@ import {
 } from "@chordmaster/utils";
 import { Chord } from "chordsheetjs";
 
-import { useTheme } from "../hooks/useTheme";
-import ChordChart from "../components/ChordChart";
+import { useTheme } from "@/hooks/useTheme";
 
-import { FONTS } from "../constants/theme";
 // originally from: https://github.com/artutra/OpenChord/tree/master/app/assets/chords
 // better? : https://github.com/T-vK/chord-collection
 // import chords from '../assets/chords/guitar.json';
 import chords from "../assets/chords/chords.json";
+import ChordChart from "./ChordChart";
+import { FONTS } from "@/constants/theme";
 
 interface ChordsData {
   [index: string]: {

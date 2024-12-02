@@ -3,7 +3,7 @@ import { StyleSheet, TextInput, TextInputProps, View } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 interface SearchBarProps extends TextInputProps {
   query: string;

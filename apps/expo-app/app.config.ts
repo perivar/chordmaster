@@ -34,15 +34,18 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     backgroundColor: "#004aac",
   },
   runtimeVersion: {
+    // this is used by eas OTA update to verify whether the frontend code can be updated
     policy: "sdkVersion",
   },
   updates: {
+    // this is added using eas update:configure to allow eas OAT updates
+    checkAutomatically: "WIFI_ONLY",
     fallbackToCacheTimeout: 0,
     url: "https://u.expo.dev/60bae21e-e73c-4ce6-b53a-5de1519573c2",
   },
   assetBundlePatterns: ["**/*"],
   userInterfaceStyle: "automatic",
-  newArchEnabled: false,
+  newArchEnabled: true,
   ios: {
     supportsTablet: true,
     bundleIdentifier: "com.nerseth.chordmaster",
@@ -61,10 +64,12 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   },
   web: {
     favicon: "./assets/favicon.png",
+    bundler: "metro",
   },
   plugins: [
     "expo-font",
     "expo-localization",
+    "expo-router",
     [
       // https://github.com/expo/eas-cli/issues/693#issuecomment-1095229385
       "expo-document-picker",
@@ -99,7 +104,11 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
     androidGoogleClientId: process.env.ANDROID_GOOGLE_CLIENT_ID || "",
     googleMapsCredentials: process.env.GOOGLEMAPS_CREDENTIAL || "",
     eas: {
+      // this is added using eas update:configure to allow eas OAT updates
       projectId: "60bae21e-e73c-4ce6-b53a-5de1519573c2",
     },
+  },
+  experiments: {
+    typedRoutes: true,
   },
 });

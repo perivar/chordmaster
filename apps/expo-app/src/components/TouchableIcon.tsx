@@ -2,15 +2,15 @@ import React, { FunctionComponent } from "react";
 import {
   StyleProp,
   StyleSheet,
+  TextStyle,
   TouchableOpacity,
   TouchableOpacityProps,
-  ViewStyle,
 } from "react-native";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export interface TouchableIconProps extends TouchableOpacityProps {
-  iconStyle?: StyleProp<ViewStyle>;
+  iconStyle?: StyleProp<TextStyle>;
   size?: number;
   name: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   color?: string;

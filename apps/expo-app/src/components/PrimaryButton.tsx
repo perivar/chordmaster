@@ -7,7 +7,7 @@ import {
   ViewStyle,
 } from "react-native";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 interface PrimaryButtonProps {
   style?: StyleProp<ViewStyle>;

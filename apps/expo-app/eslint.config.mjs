@@ -8,6 +8,7 @@ import pluginReactHooks from "eslint-plugin-react-hooks";
 import pluginReactNative from "eslint-plugin-react-native";
 import pluginReactJSXRuntime from "eslint-plugin-react/configs/jsx-runtime.js";
 import pluginReactRecommended from "eslint-plugin-react/configs/recommended.js";
+import pluginTailwind from "eslint-plugin-tailwindcss";
 import pluginUnusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 import eslintTs from "typescript-eslint";
@@ -40,6 +41,7 @@ export default eslintTs.config(
     files: ["**/*.{js,jsx,ts,tsx}"],
     ...pluginReactRecommended,
     ...pluginReactJSXRuntime,
+    extends: [...pluginTailwind.configs["flat/recommended"]],
     rules: {
       ...pluginReactRecommended.rules,
       ...pluginReactJSXRuntime.rules,

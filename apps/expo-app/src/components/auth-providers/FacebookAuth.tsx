@@ -6,9 +6,10 @@ import Constants from "expo-constants";
 import * as WebBrowser from "expo-web-browser";
 import { AuthError, FacebookAuthProvider } from "firebase/auth";
 
-import useFirebaseAuth from "../../hooks/useFirebaseAuth";
-import { useTheme } from "../../hooks/useTheme";
-import { debug } from "../../utils/debug";
+import useFirebaseAuth from "@/hooks/useFirebaseAuth";
+import { useTheme } from "@/hooks/useTheme";
+import { debug } from "@/utils/debug";
+
 import Button from "../Button";
 
 WebBrowser.maybeCompleteAuthSession();

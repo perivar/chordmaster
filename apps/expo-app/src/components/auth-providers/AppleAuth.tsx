@@ -3,9 +3,10 @@ import { Platform } from "react-native";
 
 import * as AppleAuthentication from "expo-apple-authentication";
 
-import useFirebaseAuth from "../../hooks/useFirebaseAuth";
-import { useTheme } from "../../hooks/useTheme";
-import { debug } from "../../utils/debug";
+import useFirebaseAuth from "@/hooks/useFirebaseAuth";
+import { useTheme } from "@/hooks/useTheme";
+import { debug } from "@/utils/debug";
+
 import Button from "../Button";
 
 export default function AppleAuth() {

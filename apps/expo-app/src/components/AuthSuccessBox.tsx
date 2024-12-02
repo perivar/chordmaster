@@ -1,6 +1,6 @@
 import { Text } from "react-native";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 interface AuthSuccessBoxProps {
   message: string;

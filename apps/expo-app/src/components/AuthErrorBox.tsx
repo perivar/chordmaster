@@ -1,7 +1,7 @@
 import { AuthError } from "firebase/auth";
 
-import useFirebaseFriendlyError from "../hooks/useFirebaseFriendlyError";
-import { useTheme } from "../hooks/useTheme";
+import useFirebaseFriendlyError from "@/hooks/useFirebaseFriendlyError";
+import { useTheme } from "@/hooks/useTheme";
 
 import ErrorText from "./ErrorText";
 

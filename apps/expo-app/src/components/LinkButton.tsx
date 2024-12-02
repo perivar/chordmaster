@@ -2,10 +2,10 @@ import { Text, TouchableOpacity } from "react-native";
 
 import * as Linking from "expo-linking";
 
-import { useLocalization } from "../hooks/useLocalization";
-import { useTheme } from "../hooks/useTheme";
+import { useLocalization } from "@/hooks/useLocalization";
+import { useTheme } from "@/hooks/useTheme";
 
-import { FONTS } from "../constants/theme";
+import { FONTS } from "@/constants/theme";
 
 type LinkButtonProps = {
   title?: string;

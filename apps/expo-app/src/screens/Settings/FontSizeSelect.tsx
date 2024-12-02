@@ -3,16 +3,17 @@ import { StyleSheet, Text, View } from "react-native";
 
 import Slider from "@react-native-community/slider";
 
-import SongRender from "../../components/SongRender";
-import SongTransformer from "../../components/SongTransformer";
-import useFirestore from "../../hooks/useFirestore";
-import { useTheme } from "../../hooks/useTheme";
-import { userSelector } from "../../redux/slices/auth";
+import useFirestore from "@/hooks/useFirestore";
+import { useTheme } from "@/hooks/useTheme";
+import SongRender from "@/components/SongRender";
+import SongTransformer from "@/components/SongTransformer";
+
+import { userSelector } from "@/redux/slices/auth";
 import {
   updateUserAppConfigReducer,
   userAppConfigSelector,
-} from "../../redux/slices/config";
-import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+} from "@/redux/slices/config";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 
 export const MIN_FONT_SIZE = 14;
 export const MAX_FONT_SIZE = 24;

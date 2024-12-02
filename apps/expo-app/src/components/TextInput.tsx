@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from "react-native";
 
 import { TextInput as PaperTextInput } from "react-native-paper";
 
-import { useTheme } from "../hooks/useTheme";
+import { useTheme } from "@/hooks/useTheme";
 
 type Props = React.ComponentProps<typeof PaperTextInput> & {
   errorText?: string;
