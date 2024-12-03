@@ -1,12 +1,5 @@
-import { Text, View } from "react-native";
-
-import { Link } from "expo-router";
+import SongEdit from "@/screens/Songs/SongEdit";
 
 export default function SongCreateScreen() {
-  return (
-    <View>
-      <Text>Song Create</Text>
-      <Link href="../">Go back</Link>
-    </View>
-  );
+  return <SongEdit id={""} />;
 }

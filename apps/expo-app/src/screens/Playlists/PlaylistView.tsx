@@ -144,7 +144,7 @@ const PlaylistView: FunctionComponent<Props> = (props: Props) => {
   };
 
   const onSelectSong = (id: string, title: string) => {
-    router.navigate({
+    router.replace({
       pathname: "/songs/[id]",
       params: { id, title },
     });
@@ -200,14 +200,15 @@ const PlaylistView: FunctionComponent<Props> = (props: Props) => {
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View className="flex-1 items-center justify-center">
         <ActivityIndicator size="large" />
       </View>
     );
   }
 
   return (
-    <View style={{ flex: 1, width: "100%", paddingTop: 20 }}>
+    <View
+      style={{ flex: 1, width: "100%", backgroundColor: colors.background }}>
       <FlashList
         data={songs}
         estimatedItemSize={songs.length || 1}

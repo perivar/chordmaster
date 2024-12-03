@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { View } from "react-native";
 
 import { FlashList } from "@shopify/flash-list";
 import { router } from "expo-router";
@@ -30,7 +31,7 @@ const ArtistView: FC<Props> = props => {
   const { deleteSong } = useFirestore();
 
   const onSelectSong = (id: string, title: string) => {
-    router.navigate({ pathname: "/songs/[id]", params: { id, title } });
+    router.replace({ pathname: "/songs/[id]", params: { id, title } });
   };
 
   const onPressEditSong = (id: string) => {
@@ -52,38 +53,41 @@ const ArtistView: FC<Props> = props => {
   };
 
   return (
-    <FlashList
-      data={songs}
-      estimatedItemSize={songs.length || 1}
-      extraData={colors}
-      renderItem={({ item }) => {
-        return (
-          <ListItem
-            containerStyle={{
-              backgroundColor: colors.background,
-              borderBottomColor: colors.surfaceDisabled,
-            }}
-            textStyle={{ color: colors.onBackground }}
-            optionMenuStyle={{
-              backgroundColor: colors.surface,
-              borderBottomWidth: 1,
-              borderBottomColor: colors.surfaceDisabled,
-            }}
-            iconColor={colors.onBackground}
-            // key={item.id!}
-            title={item.title}
-            onPress={() => onSelectSong(item.id!, item.title)}
-            options={[
-              { title: t("edit"), onPress: () => onPressEditSong(item.id!) },
-              {
-                title: t("delete"),
-                onPress: () => onPressDeleteSong(item.id!),
-              },
-            ]}
-          />
-        );
-      }}
-    />
+    <View
+      style={{ flex: 1, width: "100%", backgroundColor: colors.background }}>
+      <FlashList
+        data={songs}
+        estimatedItemSize={songs.length || 1}
+        extraData={colors}
+        renderItem={({ item }) => {
+          return (
+            <ListItem
+              containerStyle={{
+                backgroundColor: colors.background,
+                borderBottomColor: colors.surfaceDisabled,
+              }}
+              textStyle={{ color: colors.onBackground }}
+              optionMenuStyle={{
+                backgroundColor: colors.surface,
+                borderBottomWidth: 1,
+                borderBottomColor: colors.surfaceDisabled,
+              }}
+              iconColor={colors.onBackground}
+              // key={item.id!}
+              title={item.title}
+              onPress={() => onSelectSong(item.id!, item.title)}
+              options={[
+                { title: t("edit"), onPress: () => onPressEditSong(item.id!) },
+                {
+                  title: t("delete"),
+                  onPress: () => onPressDeleteSong(item.id!),
+                },
+              ]}
+            />
+          );
+        }}
+      />
+    </View>
   );
 };
 

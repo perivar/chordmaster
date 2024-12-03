@@ -108,12 +108,7 @@ const useInfiniteScroll = <ItemT extends {}>({
     if (!isLoading || !isRefreshing) return null;
 
     return (
-      <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center",
-        }}>
+      <View className="flex-1 items-center justify-center">
         <ActivityIndicator size="large" />
       </View>
     );

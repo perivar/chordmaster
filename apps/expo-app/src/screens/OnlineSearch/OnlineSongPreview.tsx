@@ -6,6 +6,7 @@ import { router } from "expo-router";
 
 import useFirestore, { ISong } from "@/hooks/useFirestore";
 import { useLocalization } from "@/hooks/useLocalization";
+import { useTheme } from "@/hooks/useTheme";
 import LinkButton from "@/components/LinkButton";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import PageView from "@/components/PageView";
@@ -33,6 +34,8 @@ const OnlineSongPreview: FunctionComponent<Props> = props => {
   const [error, setError] = useState<string | null>(null);
 
   const { t } = useLocalization();
+  const { theme } = useTheme();
+  const { colors } = theme;
 
   const { addNewSong, getSongById } = useFirestore();
 
@@ -106,7 +109,8 @@ const OnlineSongPreview: FunctionComponent<Props> = props => {
   };
 
   return (
-    <View style={{ flex: 1, marginHorizontal: 10 }}>
+    <View
+      style={{ flex: 1, width: "100%", backgroundColor: colors.background }}>
       <LoadingIndicator error={error} loading={isLoading} />
       {song !== null && (
         <PageView hasNoFooter>

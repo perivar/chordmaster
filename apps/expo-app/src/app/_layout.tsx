@@ -1,3 +1,7 @@
+import { useEffect, useState } from "react";
+import { ActivityIndicator, View } from "react-native";
+
+import Constants from "expo-constants";
 import { Stack } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider as PaperProvider } from "react-native-paper";
@@ -7,11 +11,9 @@ import { Provider as ReduxProvider } from "react-redux";
 import useColorScheme from "@/hooks/useColorScheme";
 import useFirebaseAuth from "@/hooks/useFirebaseAuth";
 import useFirebaseUser from "@/hooks/useFirebaseUser";
-import {
-  CombinedDarkTheme,
-  CombinedDefaultTheme,
-  useTheme,
-} from "@/hooks/useTheme";
+import useFirestoreReduxMethods from "@/hooks/useFirestoreReduxMethods";
+import { useProtectedRoute } from "@/hooks/useProtectedRoute";
+import { CombinedDarkTheme, CombinedDefaultTheme } from "@/hooks/useTheme";
 
 import LocalizationProvider from "@/context/LocalizationProvider";
 import ThemeProvider, { ThemeType } from "@/context/ThemeProvider";
@@ -23,13 +25,6 @@ import SplashScreen from "@/screens/SplashScreen";
 import "react-native-reanimated";
 import "../../global.css";
 
-import { useEffect, useState } from "react";
-import { ActivityIndicator, View } from "react-native";
-
-import Constants from "expo-constants";
-
-import useFirestoreReduxMethods from "@/hooks/useFirestoreReduxMethods";
-
 export default function RootLayout() {
   // const isLoadingComplete = useCachedResources();
   const isLoadingComplete = true;
@@ -39,21 +34,20 @@ export default function RootLayout() {
   } else {
     return (
       <SafeAreaProvider>
-        <ThemeProvider>
-          <LocalizationProvider>
-            <ReduxProvider store={store}>
-              <GestureHandlerRootView style={{ flex: 1 }}>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <ThemeProvider>
+            <LocalizationProvider>
+              <ReduxProvider store={store}>
                 <InnerLayout />
-              </GestureHandlerRootView>
-            </ReduxProvider>
-          </LocalizationProvider>
-        </ThemeProvider>
+              </ReduxProvider>
+            </LocalizationProvider>
+          </ThemeProvider>
+        </GestureHandlerRootView>
       </SafeAreaProvider>
     );
   }
 }
 
-// In order to avoid the Error: useTheme must be used within a ThemeProvider
 function InnerLayout() {
   const colorScheme = useColorScheme();
   const isDarkMode = colorScheme === ThemeType.DARK;
@@ -61,29 +55,21 @@ function InnerLayout() {
 
   return (
     <PaperProvider theme={combinedTheme}>
-      <AuthCheck />
+      <ProtectedLayout />
     </PaperProvider>
   );
 }
 
-function AuthCheck() {
+function ProtectedLayout() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  // setup the different auth methods, like onAppleLogin and onEmailAndPasswordLogin
   const { authSetup } = useFirebaseAuth();
 
+  // ensure the user is stored in redux whenever a new user is logged in
   useFirebaseUser();
 
   const user = useAppSelector(userSelector);
-
-  if (!authSetup) {
-    // We haven't finished checking for user yet
-    return <SplashScreen />;
-  }
-
-  return <>{user ? <RootStack /> : <OnboardingStack />}</>;
-}
-
-function RootStack() {
-  const { theme } = useTheme();
-  const { colors } = theme;
 
   const {
     loadAppConfigData,
@@ -92,11 +78,11 @@ function RootStack() {
     loadUserPlaylistData,
   } = useFirestoreReduxMethods();
 
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  useProtectedRoute(user, "/login", "/playlists");
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (user) loadData();
+  }, [user]);
 
   const loadData = async () => {
     setIsLoading(true);
@@ -121,9 +107,14 @@ function RootStack() {
     setIsLoading(false);
   };
 
+  if (!authSetup) {
+    // We haven't finished checking for user yet
+    return <SplashScreen />;
+  }
+
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <View className="flex-1 items-center justify-center">
         <ActivityIndicator size="large" />
       </View>
     );
@@ -132,23 +123,10 @@ function RootStack() {
   return (
     <Stack
       screenOptions={{
-        headerStyle: {
-          backgroundColor: colors.background,
-        },
-        headerTintColor: colors.onBackground,
-      }}>
-      <Stack.Screen name="(auth)/(tabs)" options={{ headerShown: false }} />
-    </Stack>
-  );
-}
-
-function OnboardingStack() {
-  return (
-    <Stack
-      screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="(public)" options={{ headerShown: false }} />
+      <Stack.Screen name="(auth)/(tabs)" />
+      <Stack.Screen name="(public)" />
     </Stack>
   );
 }

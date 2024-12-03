@@ -1,10 +1,12 @@
 import { useState } from "react";
 
-import { userSelector } from "../redux/slices/auth";
+import useFirestore from "./useFirestore";
+import useIsMounted from "./useIsMounted";
+import { userSelector } from "@/redux/slices/auth";
 import {
   updateAppConfigReducer,
   updateUserAppConfigReducer,
-} from "../redux/slices/config";
+} from "@/redux/slices/config";
 import {
   editPlaylistReducer,
   setArtists,
@@ -12,10 +14,8 @@ import {
   setOrUpdateSongs,
   setPlaylists,
   setSongs,
-} from "../redux/slices/library";
-import { useAppDispatch, useAppSelector } from "../redux/store/hooks";
-import useFirestore from "./useFirestore";
-import useIsMounted from "./useIsMounted";
+} from "@/redux/slices/library";
+import { useAppDispatch, useAppSelector } from "@/redux/store/hooks";
 
 export type UseFirestoreReduxMethodsHookResult = {
   isLoading: boolean;
