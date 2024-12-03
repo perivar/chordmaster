@@ -1,5 +1,5 @@
-import { memo, useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 
 import { validateUtils } from "@chordmaster/utils";
 import Constants from "expo-constants";
@@ -66,7 +66,6 @@ const Login = () => {
             textContentType="emailAddress"
             keyboardType="email-address"
           />
-
           <TextInput
             label="Password"
             returnKeyType="done"
@@ -81,33 +80,38 @@ const Login = () => {
             autoComplete="off"
           />
 
-          <View style={styles.forgotPassword}>
+          <View className="mb-6 w-full items-end">
             <TouchableOpacity onPress={() => router.navigate("/forgotten")}>
-              <Text style={styles.label}>Forgot your password?</Text>
+              <Text style={{ color: colors.primary }}>
+                Forgot your password?
+              </Text>
             </TouchableOpacity>
           </View>
-
           <Button
             mode="contained"
             style={{
               borderRadius: 5,
+              backgroundColor: colors.secondaryContainer,
             }}
             contentStyle={{
               width: "100%",
               height: 44,
             }}
-            labelStyle={{ textAlign: "center", fontSize: 14 }}
+            labelStyle={{
+              textAlign: "center",
+              fontSize: 14,
+              color: colors.onSecondaryContainer,
+            }}
             onPress={() => onEmailAndPasswordLogin(email, password)}
             disabled={isEnableSignIn() ? false : true}>
             Login
           </Button>
-
-          <View style={styles.row}>
-            <Text style={[styles.label, { color: colors.secondary }]}>
+          <View className="mt-1 flex-row">
+            <Text className="font-bold" style={{ color: colors.secondary }}>
               Don’t have an account?{" "}
             </Text>
             <TouchableOpacity onPress={() => router.replace("/register")}>
-              <Text style={[styles.link, { color: colors.primary }]}>
+              <Text className="font-bold" style={{ color: colors.primary }}>
                 Sign up
               </Text>
             </TouchableOpacity>
@@ -129,20 +133,4 @@ const Login = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  forgotPassword: {
-    width: "100%",
-    alignItems: "flex-end",
-    marginBottom: 24,
-  },
-  row: {
-    flexDirection: "row",
-    marginTop: 4,
-  },
-  label: {},
-  link: {
-    fontWeight: "bold",
-  },
-});
-
-export default memo(Login);
+export default Login;

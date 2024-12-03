@@ -1,4 +1,4 @@
-import { FunctionComponent, memo } from "react";
+import { FunctionComponent } from "react";
 import {
   ScrollView,
   StyleProp,
@@ -179,4 +179,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(DebugInfo);
+export default DebugInfo;

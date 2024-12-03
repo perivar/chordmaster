@@ -7,7 +7,6 @@ import * as WebBrowser from "expo-web-browser";
 import { AuthError, FacebookAuthProvider } from "firebase/auth";
 
 import useFirebaseAuth from "@/hooks/useFirebaseAuth";
-import { useTheme } from "@/hooks/useTheme";
 import { debug } from "@/utils/debug";
 
 import Button from "../Button";
@@ -15,8 +14,6 @@ import Button from "../Button";
 WebBrowser.maybeCompleteAuthSession();
 
 export default function FacebookAuth() {
-  const { dark } = useTheme();
-
   const { firebaseLoginWithCredentials, setAuthError } = useFirebaseAuth();
 
   const [_, facebookResponse, facebookPromptAsync] = Facebook.useAuthRequest({
@@ -64,13 +61,11 @@ export default function FacebookAuth() {
   return (
     <Button
       icon={"facebook"}
-      mode="contained"
+      mode="outlined"
       uppercase={false}
       style={{
         borderRadius: 5,
-        backgroundColor: dark ? "white" : "black",
       }}
-      textColor={dark ? "black" : "white"}
       labelStyle={{ textAlign: "center", fontSize: 14 }}
       onPress={onFacebookLogin}>
       Continue with Facebook

@@ -1,10 +1,7 @@
-import React, { memo } from "react";
-import {
-  KeyboardAvoidingView,
-  StyleProp,
-  StyleSheet,
-  ViewStyle,
-} from "react-native";
+import React from "react";
+import { KeyboardAvoidingView, StyleProp, ViewStyle } from "react-native";
+
+import { useTheme } from "@/hooks/useTheme";
 
 type BackgroundProps = {
   children: React.ReactNode;
@@ -12,24 +9,17 @@ type BackgroundProps = {
 };
 
 const Background = ({ children, containerStyle }: BackgroundProps) => {
+  const { theme } = useTheme();
+  const { colors } = theme;
+
   return (
     <KeyboardAvoidingView
-      style={[styles.container, containerStyle]}
+      className="w-full flex-1 items-center justify-center self-center"
+      style={[{ backgroundColor: colors.background }, containerStyle]}
       behavior="padding">
       {children}
     </KeyboardAvoidingView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    maxWidth: 350,
-    alignSelf: "center",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
-
-export default memo(Background);
+export default Background;

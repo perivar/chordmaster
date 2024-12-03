@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { validateUtils } from "@chordmaster/utils";
@@ -66,12 +66,17 @@ const ForgotPassword = () => {
             mode="contained"
             style={{
               borderRadius: 5,
+              backgroundColor: colors.secondaryContainer,
             }}
             contentStyle={{
               width: "100%",
               height: 44,
             }}
-            labelStyle={{ textAlign: "center", fontSize: 14 }}
+            labelStyle={{
+              textAlign: "center",
+              fontSize: 14,
+              color: colors.onSecondaryContainer,
+            }}
             onPress={() => onSendPasswordResetEmail(email)}
             disabled={isEnableSendEmail() ? false : true}>
             Send Reset Instructions
@@ -94,4 +99,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(ForgotPassword);
+export default ForgotPassword;

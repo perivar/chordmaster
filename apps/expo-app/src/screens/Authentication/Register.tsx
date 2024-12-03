@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { validateUtils } from "@chordmaster/utils";
@@ -99,12 +99,17 @@ const Register = () => {
             mode="contained"
             style={{
               borderRadius: 5,
+              backgroundColor: colors.secondaryContainer,
             }}
             contentStyle={{
               width: "100%",
               height: 44,
             }}
-            labelStyle={{ textAlign: "center", fontSize: 14 }}
+            labelStyle={{
+              textAlign: "center",
+              fontSize: 14,
+              color: colors.onSecondaryContainer,
+            }}
             onPress={() =>
               onEmailAndPasswordSignup(displayName, email, password)
             }
@@ -148,4 +153,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(Register);
+export default Register;

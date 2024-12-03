@@ -4,14 +4,11 @@ import { Platform } from "react-native";
 import * as AppleAuthentication from "expo-apple-authentication";
 
 import useFirebaseAuth from "@/hooks/useFirebaseAuth";
-import { useTheme } from "@/hooks/useTheme";
 import { debug } from "@/utils/debug";
 
 import Button from "../Button";
 
 export default function AppleAuth() {
-  const { dark } = useTheme();
-
   const { onAppleLogin } = useFirebaseAuth();
   const [appleAuthAvailable, setAppleAuthAvailable] = useState<boolean>(false);
 
@@ -39,13 +36,11 @@ export default function AppleAuth() {
   return (
     <Button
       icon={"apple"}
-      mode="contained"
+      mode="outlined"
       uppercase={false}
       style={{
         borderRadius: 5,
-        backgroundColor: dark ? "white" : "black",
       }}
-      textColor={dark ? "black" : "white"}
       labelStyle={{ textAlign: "center", fontSize: 14 }}
       onPress={onAppleLogin}>
       Continue with Apple

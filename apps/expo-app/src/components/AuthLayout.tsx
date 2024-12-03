@@ -31,12 +31,14 @@ export default function AuthLayout({
     <Background>
       <BackButton goBack={navigationLink} />
       <ScrollView style={{ flex: 1, width: "100%" }}>
-        {header && <View>{header}</View>}
-        {title && <Header>{title}</Header>}
-        {error && <AuthErrorBox error={error} />}
-        {success && <AuthSuccessBox message={success} />}
-        {children}
-        {footer && <View>{footer}</View>}
+        <View className="p-10">
+          {header && <View>{header}</View>}
+          {title && <Header>{title}</Header>}
+          {error && <AuthErrorBox error={error} />}
+          {success && <AuthSuccessBox message={success} />}
+          {children}
+          {footer && <View>{footer}</View>}
+        </View>
         <View style={{ paddingBottom: 50 }}></View>
       </ScrollView>
     </Background>

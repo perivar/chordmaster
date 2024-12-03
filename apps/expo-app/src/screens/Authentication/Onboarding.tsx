@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 import { router } from "expo-router";
@@ -23,17 +22,22 @@ const Onboarding = () => {
 
       <Paragraph>Welcome and enjoy.</Paragraph>
 
-      <View style={{ width: "100%" }}>
+      <View className="p-10">
         <Button
           mode="contained"
           style={{
             borderRadius: 5,
+            backgroundColor: colors.secondaryContainer,
           }}
           contentStyle={{
             width: "100%",
             height: 44,
           }}
-          labelStyle={{ textAlign: "center", fontSize: 14 }}
+          labelStyle={{
+            textAlign: "center",
+            fontSize: 14,
+            color: colors.onSecondaryContainer,
+          }}
           onPress={() => router.navigate("/login")}>
           Login
         </Button>
@@ -83,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default memo(Onboarding);
+export default Onboarding;

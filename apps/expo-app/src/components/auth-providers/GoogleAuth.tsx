@@ -7,7 +7,6 @@ import * as WebBrowser from "expo-web-browser";
 import { AuthError, GoogleAuthProvider } from "firebase/auth";
 
 import useFirebaseAuth from "@/hooks/useFirebaseAuth";
-import { useTheme } from "@/hooks/useTheme";
 import { debug } from "@/utils/debug";
 
 import Button from "../Button";
@@ -15,8 +14,6 @@ import Button from "../Button";
 WebBrowser.maybeCompleteAuthSession();
 
 export default function GoogleAuth() {
-  const { dark } = useTheme();
-
   const { firebaseLoginWithCredentials, setAuthError } = useFirebaseAuth();
 
   const [_, googleResponse, googlePromptAsync] = Google.useIdTokenAuthRequest({
@@ -66,13 +63,11 @@ export default function GoogleAuth() {
   return (
     <Button
       icon={"google"}
-      mode="contained"
+      mode="outlined"
       uppercase={false}
       style={{
         borderRadius: 5,
-        backgroundColor: dark ? "white" : "black",
       }}
-      textColor={dark ? "black" : "white"}
       labelStyle={{ textAlign: "center", fontSize: 14 }}
       onPress={onGoogleLogin}>
       Continue with Google
