@@ -7,3 +7,4 @@ node_modules
 tsconfig.tsbuildinfo
 apps/remix-app/build
 apps/node-cli/backup
+debug
