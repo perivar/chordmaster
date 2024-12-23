@@ -26,12 +26,20 @@ const baseConfig: Config = {
     moduleNameMapper: {
         '^@/(.*)$': '<rootDir>/src/$1', // Adjust based on your monorepo structure
     },
+    // had to add isolatedModules: true to make sure the jest tests did not take forever to start
+    // https://github.com/jestjs/jest/issues/10833
     transform: {
-        '^.+\\.tsx?$': 'ts-jest',
+        "\\.[jt]sx?$": [
+            "ts-jest",
+            { tsconfig: "tsconfig.json", isolatedModules: true },
+        ],
     },
+    transformIgnorePatterns: [
+        `node_modules/(?!.*(${untranspiledModulePatterns.join("|")}))`,
+    ],
+    testRegex: "/__tests__/.*\\.(test|spec)\\.[tj]sx?$",
     coverageDirectory: '<rootDir>/coverage/',
     collectCoverageFrom: ['**/src/**/*.{ts,tsx}', '!**/node_modules/**'],
-    testRegex: "/__tests__/.*.(spec|test).ts$",
     verbose: true
 };
 

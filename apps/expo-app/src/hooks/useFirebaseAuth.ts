@@ -340,7 +340,7 @@ const useFirebaseAuth = () => {
       if (currentUser) {
         await updatePassword(currentUser, password);
         setAuthError(undefined);
-        setAuthSuccess("Password updated succesfully");
+        setAuthSuccess("Password updated successfully");
       }
     } catch (err) {
       debug("onUpdatePassword error:", err);

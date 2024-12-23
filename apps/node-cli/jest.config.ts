@@ -1,21 +1,11 @@
-import baseConfig, { untranspiledModulePatterns } from "../../jest.config.base";
+import type { Config } from "jest";
 
-const nodeCliDir = "./";
+import baseConfig from "../../jest.config.base";
 
-const config = {
+const config: Config = {
   ...baseConfig,
   displayName: "node-cli", // Name for the Jest project
-  rootDir: `${nodeCliDir}`,
-  transform: {
-    "\\.[jt]sx?$": [
-      "ts-jest",
-      { tsconfig: `${nodeCliDir}/tsconfig.json`, isolatedModules: true },
-    ],
-  },
-  transformIgnorePatterns: [
-    `${nodeCliDir}/node_modules/(?!(${untranspiledModulePatterns.join("|")})/)`,
-  ],
-  testRegex: "/__tests__/.*.(spec|test).ts$",
+  roots: ["src"],
 };
 
 export default config;
