@@ -1,9 +1,9 @@
-import type { Config } from "jest";
+import { Config } from "@jest/types"
 
-import baseConfig from "../../jest.config.base";
+import { jestBaseConfig } from "../../jest.config.base";
 
-const config: Config = {
-  ...baseConfig,
+const config: Config.InitialOptions = {
+  ...jestBaseConfig,
   displayName: "remix-app", // Name for the Jest project
   roots: ["app"],
 };

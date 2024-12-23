@@ -1,4 +1,4 @@
-import baseConfig, { untranspiledModulePatterns } from './jest.config.base';
+import { jestBaseConfig, jestProjectConfig, untranspiledModulePatterns } from './jest.config.base';
 
 // Define reusable paths
 const remixAppDir = "<rootDir>/apps/remix-app";
@@ -7,9 +7,10 @@ const nodeCliDir = "<rootDir>/apps/node-cli";
 const sharedUtilsDir = "<rootDir>/packages/utils";
 
 const config = {
+  ...jestBaseConfig,
   projects: [
     {
-      ...baseConfig,
+      ...jestProjectConfig,
       displayName: "@chordmaster/utils",
       roots: [`${sharedUtilsDir}`],
       // had to add isolatedModules: true to make sure the jest tests did not take forever to start
@@ -19,7 +20,7 @@ const config = {
       },
     },
     {
-      ...baseConfig,
+      ...jestProjectConfig,
       displayName: "remix-app",
       roots: [`${remixAppDir}`],
       // had to add isolatedModules: true to make sure the jest tests did not take forever to start
@@ -29,7 +30,7 @@ const config = {
       },
     },
     {
-      ...baseConfig,
+      ...jestProjectConfig,
       displayName: "expo-app",
       roots: [`${expoAppDir}`],
       transform: {
@@ -39,7 +40,7 @@ const config = {
       },
     },
     {
-      ...baseConfig,
+      ...jestProjectConfig,
       displayName: "node-cli",
       roots: [`${nodeCliDir}`],
       // had to add isolatedModules: true to make sure the jest tests did not take forever to start

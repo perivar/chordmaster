@@ -1,5 +1,5 @@
 // jest.config.base.ts
-import type { Config } from 'jest';
+import { Config } from "@jest/types"
 
 // By default, all files inside `node_modules` are not transformed. But some 3rd party
 // modules are published as untranspiled, Jest will not understand the code in these modules.
@@ -19,7 +19,7 @@ export const untranspiledModulePatterns = [
     "chord-symbol"
 ];
 
-const baseConfig: Config = {
+export const jestProjectConfig: Config.InitialProjectOptions = {
     preset: 'ts-jest', // Use ts-jest for TypeScript
     testEnvironment: 'node', // Or 'jsdom' depending on your app's requirements
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
@@ -40,7 +40,9 @@ const baseConfig: Config = {
     testRegex: "/__tests__/.*\\.(test|spec)\\.[tj]sx?$",
     coverageDirectory: '<rootDir>/coverage/',
     collectCoverageFrom: ['**/src/**/*.{ts,tsx}', '!**/node_modules/**'],
+}
+
+export const jestBaseConfig: Config.InitialOptions = {
+    ...jestProjectConfig,
     verbose: true
 };
-
-export default baseConfig;
