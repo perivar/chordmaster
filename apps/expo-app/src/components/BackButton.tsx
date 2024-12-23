@@ -29,7 +29,7 @@ const BackButton = ({ goBack }: BackButtonProps) => {
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    left: 0,
+    left: 20,
     zIndex: 1, // make sure it is clickable even when other elements are overlapping
   },
   image: {

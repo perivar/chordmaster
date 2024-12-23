@@ -45,7 +45,7 @@ const Login = () => {
 
   return (
     <AuthLayout
-      navigationLink={navigation.goBack}
+      navigationLink={navigation.canGoBack() ? navigation.goBack : undefined}
       header={<Logo />}
       title={"Welcome back"}
       error={authError}>

@@ -29,7 +29,7 @@ export default function AuthLayout({
 }: Props) {
   return (
     <Background>
-      <BackButton goBack={navigationLink} />
+      {navigationLink && <BackButton goBack={navigationLink} />}
       <ScrollView style={{ flex: 1, width: "100%" }}>
         <View className="p-10">
           {header && <View>{header}</View>}
