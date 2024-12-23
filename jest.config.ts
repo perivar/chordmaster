@@ -23,6 +23,14 @@ const config = {
       ...jestProjectConfig,
       displayName: "remix-app",
       roots: [`${remixAppDir}`],
+
+      // make sure to fix paths for jsdom testing
+      testEnvironment: "jsdom",
+      setupFilesAfterEnv: [`${remixAppDir}/jest.setup.ts`],
+      moduleNameMapper: {
+        "^~/(.*)$": `${remixAppDir}/app/$1`,
+      },
+
       // had to add isolatedModules: true to make sure the jest tests did not take forever to start
       // https://github.com/jestjs/jest/issues/10833
       transform: {
